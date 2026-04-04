@@ -1,39 +1,46 @@
-
-const express = require("express");
-const mongoose = require("mongoose");
-const path = require("path");
-require("dotenv").config();
+const express = require('express');
+const path = require('path');
 
 const app = express();
 
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static(__dirname));
 
-/* ===== HOME PAGE ===== */
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public/index.html"));
+// قاعدة بيانات مؤقتة
+let users = [];
+
+// تسجيل
+app.post('/register', (req, res) => {
+  const { username, password } = req.body;
+
+  const user = {
+    username,
+    password,
+    balance: 0
+  };
+
+  users.push(user);
+  res.json({ message: 'تم التسجيل' });
 });
 
-/* ===== TOOLS PAGE ===== */
-app.get("/tools", (req, res) => {
-  res.sendFile(path.join(__dirname, "public/tools.html"));
+// تسجيل دخول
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+
+  const user = users.find(
+    u => u.username === username && u.password === password
+  );
+
+  if (!user) {
+    return res.json({ message: 'خطأ' });
+  }
+
+  res.json({ message: 'نجاح', balance: user.balance });
 });
 
-/* ===== API ===== */
-app.get("/api/status", (req, res) => {
-  res.json({ status: "🚀 PlayZone V9 is running successfully" });
+// الصفحة الرئيسية
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-/* ===== MONGODB (optional) ===== */
-if (process.env.MONGO_URL) {
-  mongoose.connect(process.env.MONGO_URL)
-    .then(() => console.log("MongoDB connected"))
-    .catch(err => console.log("MongoDB error:", err));
-}
-
-/* ===== PORT ===== */
-const PORT = process.env.PORT || 10000;
-
-app.listen(PORT, () => {
-  console.log("Server running on port", PORT);
-});
+app.listen(process.env.PORT || 10000);
