@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tools - PlayZone</title>
+</head>
+<body style="font-family:Arial;text-align:center;padding-top:50px;">
+  <h1>🧰 Tools Page</h1>
+
+  <button onclick="check()">Check Server</button>
+
+  <p id="out"></p>
+
+  <script>
+    async function check() {
+      const res = await fetch('/api/status');
+      const data = await res.json();
+      document.getElementById('out').innerText = data.status;
+    }
+  </script>
+
+  <br><br>
+  <a href="/">Back Home</a>
+</body>
+</html>
