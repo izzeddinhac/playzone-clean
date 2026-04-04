@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PlayZone</title>
+</head>
+<body>
+
+<h2>تسجيل</h2>
+<input id="regUser" placeholder="username">
+<input id="regPass" placeholder="password">
+<button onclick="register()">Register</button>
+
+<h2>دخول</h2>
+<input id="logUser" placeholder="username">
+<input id="logPass" placeholder="password">
+<button onclick="login()">Login</button>
+
+<h3 id="result"></h3>
+
+<script>
+async function register() {
+  const res = await fetch('/register', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      username: regUser.value,
+      password: regPass.value
+    })
+  });
+
+  const data = await res.json();
+  result.innerText = data.message;
+}
+
+async function login() {
+  const res = await fetch('/login', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      username: logUser.value,
+      password: logPass.value
+    })
+  });
+
+  const data = await res.json();
+  result.innerText = data.message + " | الرصيد: " + (data.balance || 0);
+}
+</script>
+
+</body>
+</html>
