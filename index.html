@@ -1,44 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
   <title>PlayZone</title>
-  <style>
-    body {
-      background: #0f172a;
-      color: white;
-      font-family: Arial;
-      text-align: center;
-      padding-top: 100px;
-    }
-    button {
-      padding: 10px 20px;
-      background: #22c55e;
-      border: none;
-      color: white;
-      cursor: pointer;
-      border-radius: 8px;
-    }
-  </style>
 </head>
 <body>
-
-  <h1>🔥 PlayZone شغال 🔥</h1>
-  <p>إذا شايف هاي الصفحة، السيرفر تمام</p>
-
-  <button onclick="testAPI()">جرب السيرفر</button>
-
-  <p id="result"></p>
-
-  <script>
-    function testAPI() {
-      fetch("/api/test")
-        .then(res => res.json())
-        .then(data => {
-          document.getElementById("result").innerText = data.message;
-        });
-    }
-  </script>
-
+  <h1>🔥 اشتغل الموقع 🔥</h1>
 </body>
 </html>
