@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Withdraw</h1>
+
+<input placeholder="Wallet Address">
+<input type="number" placeholder="Amount">
+
+<button onclick="send()">Send</button>
+
+<script>
+function send() {
+  fetch("/withdraw", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({ amount: 10 })
+  });
+
+  alert("Withdraw sent");
+}
+</script>
+
+</body>
+</html>
