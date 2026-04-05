@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PlayZone</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+      text-align: center;
+    }
+
+    .header {
+      padding: 20px;
+      background: #1e293b;
+      font-size: 22px;
+    }
+
+    .balance-box {
+      background: #22c55e;
+      margin: 20px;
+      padding: 20px;
+      border-radius: 15px;
+      color: black;
+      font-size: 20px;
+    }
+
+    .buttons {
+      margin: 20px;
+    }
+
+    button {
+      padding: 12px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .deposit { background: #3b82f6; color: white; }
+    .withdraw { background: #ef4444; color: white; }
+    .tasks { background: #f59e0b; color: black; }
+
+    .vip-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .vip-card {
+      background: #1e293b;
+      padding: 15px;
+      border-radius: 15px;
+      border: 1px solid #334155;
+    }
+
+    .vip-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .vip-profit {
+      color: #22c55e;
+      margin-bottom: 10px;
+    }
+
+    .buy-btn {
+      background: #6366f1;
+      color: white;
+      padding: 8px;
+      border-radius: 8px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="header">🔥 PlayZone VIP</div>
+
+<div class="balance-box">
+  Balance: <span id="balance">0</span> USDT
+  <br>
+  VIP Level: <span id="vip">0</span>
+</div>
+
+<div class="buttons">
+  <button class="deposit" onclick="goDeposit()">Deposit</button>
+  <button class="withdraw" onclick="goWithdraw()">Withdraw</button>
+  <button class="tasks" onclick="goTasks()">Tasks</button>
+</div>
+
+<div class="vip-container">
+
+  <div class="vip-card">
+    <div class="vip-title">VIP 1</div>
+    <div class="vip-profit">Daily: 2 USDT</div>
+    <button class="buy-btn">Buy</button>
+  </div>
+
+  <div class="vip-card">
+    <div class="vip-title">VIP 2</div>
+    <div class="vip-profit">Daily: 5 USDT</div>
+    <button class="buy-btn">Buy</button>
+  </div>
+
+  <div class="vip-card">
+    <div class="vip-title">VIP 3</div>
+    <div class="vip-profit">Daily: 10 USDT</div>
+    <button class="buy-btn">Buy</button>
+  </div>
+
+  <div class="vip-card">
+    <div class="vip-title">VIP 4</div>
+    <div class="vip-profit">Daily: 20 USDT</div>
+    <button class="buy-btn">Buy</button>
+  </div>
+
+</div>
+
+<script>
+async function loadUser() {
+  const res = await fetch('/user');
+  const data = await res.json();
+
+  document.getElementById('balance').innerText = data.balance;
+  document.getElementById('vip').innerText = data.vipLevel;
+}
+
+function goDeposit() {
+  window.location.href = "/deposit.html";
+}
+
+function goWithdraw() {
+  window.location.href = "/withdraw.html";
+}
+
+function goTasks() {
+  window.location.href = "/tasks.html";
+}
+
+loadUser();
+</script>
+
+</body>
+</html>
