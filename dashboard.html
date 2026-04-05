@@ -1,11 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PlayZone</title>
+  <title>Dashboard</title>
 </head>
+
 <body>
 
-<h1>PlayZone is working 🚀</h1>
+<h1>🔥 PlayZone Dashboard</h1>
+
+<p>Balance: <span id="balance">0</span> USDT</p>
+<p>VIP Level: <span id="vip">0</span></p>
+
+<br>
+
+<a href="/deposit.html">Deposit</a>
+<a href="/withdraw.html">Withdraw</a>
+
+<script>
+fetch("/user")
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("balance").innerText = data.balance;
+    document.getElementById("vip").innerText = data.vipLevel;
+  });
+</script>
 
 </body>
 </html>
